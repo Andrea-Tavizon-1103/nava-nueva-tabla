@@ -3,7 +3,7 @@ from .models import Empleado
 
 def inicio_vista(request):
     losempleados = Empleado.objects.all()
-    return render(request, "gestionarEmpleado.html", {"misempleados": losempleados})
+    return render(request, "gestionarEmpleados.html", {"misempleados": losempleados})
 
 def registrarEmpleado(request):
     idempleado = request.POST["txtidempleado"]
@@ -12,7 +12,7 @@ def registrarEmpleado(request):
     correo = request.POST["txtcorreo"]
     telefono = request.POST["numtelefono"]
     puesto = request.POST["txtpuesto"]
-    fecha_contratacion = request.POST["txtFechaContratacion"]
+    fecha_contratacion = request.POST["txtfechacontratacion"]
 
     Empleado.objects.create(
         idempleado=idempleado,
@@ -32,7 +32,7 @@ def borrarEmpleado(request, idempleado):
 
 def seleccionarEmpleado(request, idempleado):
     empleado = get_object_or_404(Empleado, idempleado=idempleado)
-    return render(request, "editarEmpleado.html", {"empleado": empleado})
+    return render(request, "editarEmpleados.html", {"empleado": empleado})
 
 def editarEmpleado(request):
     idempleado = request.POST["txtidempleado"]
@@ -41,7 +41,7 @@ def editarEmpleado(request):
     correo = request.POST["txtcorreo"]
     telefono = request.POST["numtelefono"]
     puesto = request.POST["txtpuesto"]
-    fecha_contratacion = request.POST["txtFechaContratacion"]
+    fecha_contratacion = request.POST["txtfechacontratacion"]
 
     empleado = get_object_or_404(Empleado, idempleado=idempleado)
     empleado.nombre = nombre
