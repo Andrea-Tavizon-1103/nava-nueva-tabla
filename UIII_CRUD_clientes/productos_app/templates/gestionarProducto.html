@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"> <!-- Fila -->
+    <div class="col-sm-12 col-md-4 col-lg-4 xl-4"> <!-- Columna izquierda-->
+        <h1> Productos </h1>
+        <div class="card"><!-- Tarjeta -->
+            <div class="card-body">
+                <form action="/registrarProducto/" method="post"> {% csrf_token %}
+                    <div class="form-group">
+                        <input type="text" id="txtidproducto" name="txtidproducto" placeholder="idproducto" 
+                               class="form-control" minlength="1" maxlength="6" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtnombre" name="txtnombre" placeholder="nombre" 
+                               class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtdescripcion" name="txtdescripcion" placeholder="descripción" 
+                               class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="numprecio" name="numprecio" placeholder="precio" 
+                               class="form-control" step="0.01" min="0" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="number" id="numstock" name="numstock" placeholder="stock" 
+                               class="form-control" step="1" min="0" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="text" id="txtcategoria" name="txtcategoria" placeholder="categoría" 
+                               class="form-control" minlength="1" maxlength="100" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <input type="date" id="txtfecha_agregado" name="txtfecha_agregado" 
+                               placeholder="fecha_agregado" class="form-control" required><br>
+                    </div>
+                    <div class="form-group py-3">
+                        <button type="submit" class="btn btn-dark"> Guardar Producto </button><br>
+                    </div>
+                </form>
+            </div>
+        </div><!-- Tarjeta -->
+    </div><!-- Columna izquierda -->
+
+    <div class="col-sm-12 col-md-8 col-lg-8 xl-8"> <!-- Columna derecha -->
+        <h1> Listado De Productos </h1>
+        <!-- Tabla -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">idproducto</th>
+                    <th scope="col">nombre</th>
+                    <th scope="col">descripción</th>
+                    <th scope="col">precio</th>
+                    <th scope="col">stock</th>
+                    <th scope="col">categoría</th>
+                    <th scope="col">fecha_agregado</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for m in misproductos %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ m.idproducto }}</td>
+                    <td>{{ m.nombre }}</td>
+                    <td>{{ m.descripcion }}</td>
+                    <td>{{ m.precio }}</td>
+                    <td>{{ m.stock }}</td>
+                    <td>{{ m.categoria }}</td>
+                    <td>{{ m.fecha_agregado }}</td>
+                    <td>
+                        <a href="seleccionarProducto/{{ m.idproducto }}" class="btn btn-info"> Editar </a>
+                    </td>
+                    <td>
+                        <a href="borrarProducto/{{ m.idproducto }}" class="btn btn-danger"> Borrar </a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <!-- Tabla -->
+    </div><!-- Columna derecha -->
+</div>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block cuerpo %}
+
+<div class="row"><!-- Fila en editar -->
+    <div class="col-md-4 offset-md-4">
+        <h2>Editar Producto</h2>
+        <!-- Código tarjeta -->
+        <div class="card"><!-- Tarjeta -->
+            <div class="card-body">
+              <form action="/editarProducto/" method="POST"> {% csrf_token %}
+                <div class="form-group">
+                  <input type="text" id="txtidproducto" name="txtidproducto" class="form-control" 
+                         value="{{ producto.idproducto }}" minlength="1" maxlength="6" required><br>
+                </div>
+                <div class="form-group py-3">
+                  <input type="text" id="txtnombre" name="txtnombre" class="form-control" 
+                         value="{{ producto.nombre }}" minlength="1" maxlength="100" required><br>
+                </div>
+                <div class="form-group py-3">
+                  <input type="text" id="txtdescripcion" name="txtdescripcion" class="form-control" 
+                         value="{{ producto.descripcion }}" minlength="1" maxlength="100" required><br>
+                </div>
+                <div class="form-group py-3">
+                  <input type="number" id="numprecio" name="numprecio" class="form-control" 
+                         value="{{ producto.precio }}" step="0.01" min="0" required><br>
+                </div>
+                <div class="form-group py-3">
+                  <input type="number" id="numstock" name="numstock" class="form-control" 
+                         value="{{ producto.stock }}" step="1" min="0" required><br>
+                </div>
+                <div class="form-group py-3">
+                  <input type="text" id="txtcategoria" name="txtcategoria" class="form-control" 
+                         value="{{ producto.categoria }}" minlength="1" maxlength="100" required><br>
+                </div>
+                <div class="form-group py-3">
+                  <input type="date" id="txtfecha_agregado" name="txtfecha_agregado" class="form-control" 
+                         value="{{ producto.fecha_agregado }}" required><br>
+                </div>
+                <div class="form-group py-3">
+                  <button type="submit" class="btn btn-dark"> Guardar Producto </button><br>
+                </div>
+              </form>
+            </div>
+        </div><!-- Tarjeta -->
+        <!-- Fin código tarjeta -->
+    </div>
+</div><!-- Fila en editar -->
+
+{% endblock %}
